@@ -1,0 +1,8 @@
+ILLITE
+spc
+[DECANAMINE]
+null
+ca
+1
+7
+null
