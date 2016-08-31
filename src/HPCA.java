@@ -22,6 +22,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.JSlider;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
@@ -37,7 +39,8 @@ public class HPCA {
 	private JLabel lblDataFrameTitle;
 	private JTextField txtExamplefilemdp;
 	private String selectedMDP;
-	private String[] organics;
+	private JLabel statusLabel;
+	private JLabel phStatusLabel;
 	JList<Object> leftlist;
 	private JList<String> rightlist;
 	private JButton movebutton;
@@ -115,6 +118,12 @@ public class HPCA {
 		final JSlider saltSlider = new JSlider(0,50);
 		saltSlider.setPaintTicks(true);
 		saltSlider.setPaintLabels(true);
+		saltSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				statusLabel.setText("Value : " 
+	            + ((JSlider)e.getSource()).getValue());
+	         }
+	      });
 		saltSlider.createStandardLabels(10);
 		saltSlider.setBounds(198, 198, 143, 44);
 		frame.getContentPane().add(saltSlider);
@@ -122,6 +131,11 @@ public class HPCA {
 		JLabel lblConcentration = new JLabel("Concentration");
 		lblConcentration.setBounds(198, 173, 80, 14);
 		frame.getContentPane().add(lblConcentration);
+		
+		statusLabel = new JLabel("Value : " + saltSlider.getValue());
+		statusLabel.setBounds(198, 240, 80, 14);
+		frame.getContentPane().add(statusLabel);
+		
 		
 		JLabel lblSystemSize = new JLabel("System Size");
 		lblSystemSize.setBounds(23, 129, 80, 14);
@@ -200,9 +214,15 @@ public class HPCA {
 		frame.getContentPane().add(emptybutton);
 		
 		
-		final JSlider slider_ph = new JSlider(0,50);
+		final JSlider slider_ph = new JSlider(0,14);
 		slider_ph.setPaintTicks(true);
 		slider_ph.setPaintLabels(true);
+		slider_ph.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				phStatusLabel.setText("Value : " 
+	            + ((JSlider)e.getSource()).getValue());
+	         }
+	      });
 		slider_ph.createStandardLabels(10);
 		slider_ph.setBounds(483, 171, 151, 44);
 		frame.getContentPane().add(slider_ph);
@@ -210,6 +230,10 @@ public class HPCA {
 		JLabel lblPh = new JLabel("pH");
 		lblPh.setBounds(447, 187, 25, 14);
 		frame.getContentPane().add(lblPh);
+		
+		phStatusLabel = new JLabel("Value : " + slider_ph.getValue());
+		phStatusLabel.setBounds(447, 217, 80, 14);
+		frame.getContentPane().add(phStatusLabel);
 		
 	    
 		txtExamplefilemdp = new JTextField();

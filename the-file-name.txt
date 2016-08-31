@@ -1,8 +1,8 @@
-ILLITE
-spc
-[DECANE]
-null
-ca
-34
-10
+KAOLINITE
+spce
+[DECANE, DECANOATE]
+X
+cl
+16
+8
 null
