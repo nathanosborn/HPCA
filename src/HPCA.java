@@ -112,8 +112,9 @@ public class HPCA {
 		lblSalts.setBounds(198, 104, 46, 14);
 		frame.getContentPane().add(lblSalts);
 		
-		JSlider saltSlider = new JSlider(0,50);
+		final JSlider saltSlider = new JSlider(0,50);
 		saltSlider.setPaintTicks(true);
+		saltSlider.setPaintLabels(true);
 		saltSlider.createStandardLabels(10);
 		saltSlider.setBounds(198, 198, 143, 44);
 		frame.getContentPane().add(saltSlider);
@@ -199,8 +200,9 @@ public class HPCA {
 		frame.getContentPane().add(emptybutton);
 		
 		
-		JSlider slider_ph = new JSlider(0,50);
+		final JSlider slider_ph = new JSlider(0,50);
 		slider_ph.setPaintTicks(true);
+		slider_ph.setPaintLabels(true);
 		slider_ph.createStandardLabels(10);
 		slider_ph.setBounds(483, 171, 151, 44);
 		frame.getContentPane().add(slider_ph);
@@ -256,9 +258,9 @@ public class HPCA {
 					String systemSize = HPCA.getSelectedButton(bgSystemSize);
 					// Get Salts & Concentration
 					String saltName = comboBox_salt.getSelectedItem().toString();
-					int concentration = 1;
+					int concentration = saltSlider.getValue();
 					// Get pH
-					int phNum = 7;
+					int phNum = slider_ph.getValue();
 					// Get MDP info
 						// Get filename
 						String mdpFile = selectedMDP;

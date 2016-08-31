@@ -1,8 +1,8 @@
 ILLITE
 spc
-[DECANAMINE]
+[DECANE]
 null
 ca
-1
-7
+34
+10
 null
