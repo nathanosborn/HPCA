@@ -1,8 +1,16 @@
-KAOLINITE
-spce
-[DECANE, DECANOATE]
-X
-cl
-16
-8
-null
+Mineral:	ILLITE
+
+Solvent:	spc
+
+Organics:	[DECANAMINIUM]
+
+System Size:	2
+
+Salt:		ca
+
+Concentration:	26
+
+pH:		8
+
+MDP File:	C:\Users\Nathan\Documents\Uni\Geol\Nathan\Nathan\share\test_mdp_file.mdp
+
