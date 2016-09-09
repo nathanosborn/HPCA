@@ -1,16 +1,18 @@
-Mineral:	KAOLINITE
+Mineral:	ILLITE
 
-Solvent:	spce
+Solvent:	spc
 
-Organics:	[DECANAMINE, DECANAMINIUM, DECANOATE]
+Organics:	[DECANAMINE, DECANAMINIUM, DECANE]
 
-System Size:	2
+Organics #:	[1, 2, 3]
 
-Salt:		cl
+System Size:	1
 
-Concentration:	14
+Salt:		ca
 
-pH:		10
+Concentration:	25
+
+pH:		7
 
 MDP File:	C:\Users\Nathan\Documents\Uni\Geol\Nathan\Nathan\share\test_mdp_file.mdp
 

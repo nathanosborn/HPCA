@@ -26,6 +26,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.JSlider;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JSpinner;
 import javax.swing.JList;
@@ -45,6 +46,7 @@ public class HPCA {
 	private JList<String> rightlist;
 	private JButton movebutton;
 	private JButton emptybutton;
+	private ArrayList<JSpinner> spinnerlist;
 	
 	/**
 	 * Launch the application.
@@ -74,7 +76,7 @@ public class HPCA {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 750, 400);
+		frame.setBounds(100, 100, 800, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -88,6 +90,7 @@ public class HPCA {
 		
 		String[] minerals = populateDirectoryList("mineral");
 		final JComboBox comboBox_mineral = new JComboBox(minerals);
+		comboBox_mineral.setBackground(Color.WHITE);
 		comboBox_mineral.setBounds(30, 73, 127, 20);
 		frame.getContentPane().add(comboBox_mineral);
 		
@@ -98,6 +101,7 @@ public class HPCA {
 		
 		String[] solvents = populateDirectoryList("solvent");
 		final JComboBox comboBox_solvent = new JComboBox(solvents);
+		comboBox_solvent.setBackground(Color.WHITE);
 		comboBox_solvent.setBounds(198, 73, 143, 20);
 		frame.getContentPane().add(comboBox_solvent);
 		
@@ -108,6 +112,7 @@ public class HPCA {
 		
 		String[] salts = populateDirectoryList("salt");
 		final JComboBox comboBox_salt = new JComboBox(salts);
+		comboBox_salt.setBackground(Color.WHITE);
 		comboBox_salt.setBounds(198, 129, 143, 20);
 		frame.getContentPane().add(comboBox_salt);
 		
@@ -120,9 +125,8 @@ public class HPCA {
 		saltSlider.setPaintLabels(true);
 		saltSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				statusLabel.setText("Value : " 
-	            + ((JSlider)e.getSource()).getValue());
-	         }
+				statusLabel.setText("" + ((JSlider)e.getSource()).getValue());
+			}
 	      });
 		saltSlider.createStandardLabels(10);
 		saltSlider.setBounds(198, 198, 143, 44);
@@ -132,8 +136,8 @@ public class HPCA {
 		lblConcentration.setBounds(198, 173, 80, 14);
 		frame.getContentPane().add(lblConcentration);
 		
-		statusLabel = new JLabel("Value : " + saltSlider.getValue());
-		statusLabel.setBounds(198, 240, 80, 14);
+		statusLabel = new JLabel("" + saltSlider.getValue());
+		statusLabel.setBounds(345, 207, 25, 14);
 		frame.getContentPane().add(statusLabel);
 		
 		
@@ -141,15 +145,15 @@ public class HPCA {
 		lblSystemSize.setBounds(23, 129, 80, 14);
 		frame.getContentPane().add(lblSystemSize);
 		
-		JRadioButton rdbtnX = new JRadioButton("X");
+		JRadioButton rdbtnX = new JRadioButton("1");
 		rdbtnX.setBounds(30, 146, 59, 23);
 		frame.getContentPane().add(rdbtnX);
 		
-		JRadioButton rdbtnY = new JRadioButton("Y");
+		JRadioButton rdbtnY = new JRadioButton("2");
 		rdbtnY.setBounds(30, 172, 59, 23);
 		frame.getContentPane().add(rdbtnY);
 		
-		JRadioButton rdbtnZ = new JRadioButton("Z");
+		JRadioButton rdbtnZ = new JRadioButton("3");
 		rdbtnZ.setBounds(30, 198, 59, 23);
 		frame.getContentPane().add(rdbtnZ);
 		
@@ -159,22 +163,22 @@ public class HPCA {
 		bgSystemSize.add(rdbtnZ);
 		
 		JLabel lblOrganic = new JLabel("Organic");
-		lblOrganic.setBounds(426, 11, 46, 14);
+		lblOrganic.setBounds(406, 11, 46, 14);
 		frame.getContentPane().add(lblOrganic);
 		
 		JLabel lblHeadingType = new JLabel("Type");
-		lblHeadingType.setBounds(426, 31, 46, 14);
+		lblHeadingType.setBounds(406, 31, 46, 14);
 		frame.getContentPane().add(lblHeadingType);
 		
-		JLabel lblHeadingQuantity = new JLabel("Quantity");
-		lblHeadingQuantity.setBounds(616, 31, 60, 14);
-		frame.getContentPane().add(lblHeadingQuantity);
+		JLabel lblHeadingSelected = new JLabel("Selected");
+		lblHeadingSelected.setBounds(616, 31, 60, 14);
+		frame.getContentPane().add(lblHeadingSelected);
 		
 		final String[] organics = populateDirectoryList("organic");
 		leftlist = new JList<Object>(organics);
 		leftlist.setVisibleRowCount(3);
 		leftlist.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		leftlist.setBounds(426, 48, 80, 100);
+		leftlist.setBounds(406, 48, 100, 100);
 		frame.getContentPane().add(leftlist);
 		
 		movebutton = new JButton("Move -->");
@@ -186,7 +190,10 @@ public class HPCA {
 						for (int i = 0; i < selectedorgs.length; i++) {
 							orgstrings[i] = organics[selectedorgs[i]];
 						}
-						rightlist.setListData(orgstrings);					
+						rightlist.setListData(orgstrings);	
+						
+						emptySpinners();
+						addSpinners(orgstrings.length);
 					}
 			
 				}
@@ -197,7 +204,7 @@ public class HPCA {
 		rightlist = new JList<String>();
 		rightlist.setVisibleRowCount(3);
 		rightlist.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		rightlist.setBounds(616, 49, 80, 100);
+		rightlist.setBounds(616, 49, 100, 100);
 		frame.getContentPane().add(rightlist);
 		
 		emptybutton = new JButton("Empty");
@@ -205,9 +212,10 @@ public class HPCA {
 				new ActionListener() {
 					public void actionPerformed(ActionEvent event) {
 						String[] emptystrlist = new String[0];
-						rightlist.setListData(emptystrlist);					
+						rightlist.setListData(emptystrlist);
+						
+						emptySpinners();
 					}
-			
 				}
 		);
 		emptybutton.setBounds(516, 104, 90, 25);
@@ -219,9 +227,8 @@ public class HPCA {
 		slider_ph.setPaintLabels(true);
 		slider_ph.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				phStatusLabel.setText("Value : " 
-	            + ((JSlider)e.getSource()).getValue());
-	         }
+				phStatusLabel.setText("" + ((JSlider)e.getSource()).getValue());
+			}
 	      });
 		slider_ph.createStandardLabels(10);
 		slider_ph.setBounds(483, 171, 151, 44);
@@ -231,8 +238,8 @@ public class HPCA {
 		lblPh.setBounds(447, 187, 25, 14);
 		frame.getContentPane().add(lblPh);
 		
-		phStatusLabel = new JLabel("Value : " + slider_ph.getValue());
-		phStatusLabel.setBounds(447, 217, 80, 14);
+		phStatusLabel = new JLabel("" + slider_ph.getValue());
+		phStatusLabel.setBounds(636, 176, 25, 14);
 		frame.getContentPane().add(phStatusLabel);
 		
 	    
@@ -273,11 +280,15 @@ public class HPCA {
 					// Can be done better
 					ListModel<String> organicList = rightlist.getModel();
 					int organicSize = organicList.getSize();
+					// Names
 					ArrayList<String> organicNames = new ArrayList<String>();
+					ArrayList<Integer> organicQuants = new ArrayList<Integer>();
 					for (int i = 0; i < organicSize; i++) {
 						organicNames.add( organicList.getElementAt(i) );
+						organicQuants.add( (Integer) spinnerlist.get(i).getValue() );
 					}
 					String organicString = organicNames.toString();
+					String organicQString = organicQuants.toString();
 					// Get System Size
 					String systemSize = HPCA.getSelectedButton(bgSystemSize);
 					// Get Salts & Concentration
@@ -288,8 +299,7 @@ public class HPCA {
 					// Get MDP info
 						// Get filename
 						String mdpFile = selectedMDP;
-						// Open file
-						// Parse file for relevant information
+						// Open & Parse file for relevant information instead ?
 				
 				// Create formatted strings for writing to text file
 				
@@ -298,16 +308,19 @@ public class HPCA {
 				try {
 					writer = new PrintWriter("the-file-name.txt", "UTF-8");
 					
-					writer.println(mineralName);
-					writer.println(solventName);
-					writer.println(organicString);
-					writer.println(systemSize);
-					writer.println(saltName);
-					writer.println(concentration);
-					writer.println(phNum);
-					writer.println(mdpFile);
+					writer.println("Mineral:\t" + mineralName + "\n");
+					writer.println("Solvent:\t" + solventName + "\n");
+					writer.println("Organics:\t" + organicString + "\n");
+					writer.println("Organics #:\t" + organicQString + "\n");
+					writer.println("System Size:\t" + systemSize + "\n");
+					writer.println("Salt:\t\t" + saltName + "\n");
+					writer.println("Concentration:\t" + concentration + "\n");
+					writer.println("pH:\t\t" + phNum + "\n");
+					writer.println("MDP File:\t" + mdpFile + "\n");
 					
 					writer.close();
+					
+					JOptionPane.showMessageDialog(null, "Information added to configuration file");
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -320,27 +333,52 @@ public class HPCA {
 		});
 		btnCreateFile.setBounds(496, 256, 138, 35);
 		frame.getContentPane().add(btnCreateFile);
-		/*
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(465, 45, 40, 22);
-		frame.getContentPane().add(spinner);
 		
 		JSpinner spinner_1 = new JSpinner();
-		spinner_1.setBounds(504, 60, 40, 20);
-		frame.getContentPane().add(spinner_1);
+		spinner_1.setBounds(720, 49, 40, 20);
+		//frame.getContentPane().add(spinner_1);
 		
 		JSpinner spinner_2 = new JSpinner();
-		spinner_2.setBounds(465, 79, 40, 20);
-		frame.getContentPane().add(spinner_2);
+		spinner_2.setBounds(720, 68, 40, 20);
+		//frame.getContentPane().add(spinner_2);
 		
 		JSpinner spinner_3 = new JSpinner();
-		spinner_3.setBounds(504, 96, 40, 20);
-		frame.getContentPane().add(spinner_3);
+		spinner_3.setBounds(720, 87, 40, 20);
+		//frame.getContentPane().add(spinner_3);
 		
 		JSpinner spinner_4 = new JSpinner();
-		spinner_4.setBounds(465, 110, 40, 20);
-		frame.getContentPane().add(spinner_4);
-		*/
+		spinner_4.setBounds(720, 106, 40, 20);
+		//frame.getContentPane().add(spinner_4);
+		
+		JSpinner spinner_5 = new JSpinner();
+		spinner_5.setBounds(720, 125, 40, 20);
+		//frame.getContentPane().add(spinner_5);
+		
+		JSpinner spinner_6 = new JSpinner();
+		spinner_6.setBounds(720, 144, 40, 20);
+		//frame.getContentPane().add(spinner_6);
+		spinnerlist = new ArrayList<JSpinner>();
+		spinnerlist.add(spinner_1);
+		spinnerlist.add(spinner_2);
+		spinnerlist.add(spinner_3);
+		spinnerlist.add(spinner_4);
+		spinnerlist.add(spinner_5);
+		spinnerlist.add(spinner_6);
+	}
+	
+	private void addSpinners(int spinner_num) {
+		for (int i = 0; i < spinner_num; i++) {
+			//JSpinner spinner = new JSpinner();
+			//spinner.setBounds(720, 49+(19*i), 40, 20);
+			frame.getContentPane().add(spinnerlist.get(i));
+		}
+	}
+	
+	private void emptySpinners() {
+		for (int i = 0; i < 6; i++) {
+			frame.getContentPane().remove(spinnerlist.get(i));
+		}
+		frame.getContentPane().repaint();
 	}
 
 	protected static String getSelectedButton(ButtonGroup buttonGroup) {
