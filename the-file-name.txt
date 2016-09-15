@@ -1,18 +1,18 @@
-Mineral:	ILLITE
+Mineral:	PYROPHYLLITE
 
 Solvent:	spc
 
-Organics:	[DECANAMINE, DECANAMINIUM, DECANE]
+Organics:	[DECANOIC_ACID, NAPTHALENE]
 
-Organics #:	[1, 2, 3]
+Organics #:	[1, 2]
 
 System Size:	1
 
-Salt:		ca
+Salt:		k
 
-Concentration:	25
+Concentration:	50
 
-pH:		7
+pH:		14
 
 MDP File:	C:\Users\Nathan\Documents\Uni\Geol\Nathan\Nathan\share\test_mdp_file.mdp
 

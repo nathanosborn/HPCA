@@ -24,6 +24,7 @@ import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JSlider;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -89,7 +90,7 @@ public class HPCA {
 		
 		
 		String[] minerals = populateDirectoryList("mineral");
-		final JComboBox comboBox_mineral = new JComboBox(minerals);
+		final JComboBox<Object> comboBox_mineral = new JComboBox<Object>(minerals);
 		comboBox_mineral.setBackground(Color.WHITE);
 		comboBox_mineral.setBounds(30, 73, 127, 20);
 		frame.getContentPane().add(comboBox_mineral);
@@ -100,7 +101,7 @@ public class HPCA {
 		
 		
 		String[] solvents = populateDirectoryList("solvent");
-		final JComboBox comboBox_solvent = new JComboBox(solvents);
+		final JComboBox<Object> comboBox_solvent = new JComboBox<Object>(solvents);
 		comboBox_solvent.setBackground(Color.WHITE);
 		comboBox_solvent.setBounds(198, 73, 143, 20);
 		frame.getContentPane().add(comboBox_solvent);
@@ -111,7 +112,7 @@ public class HPCA {
 		
 		
 		String[] salts = populateDirectoryList("salt");
-		final JComboBox comboBox_salt = new JComboBox(salts);
+		final JComboBox<Object> comboBox_salt = new JComboBox<Object>(salts);
 		comboBox_salt.setBackground(Color.WHITE);
 		comboBox_salt.setBounds(198, 129, 143, 20);
 		frame.getContentPane().add(comboBox_salt);
@@ -253,9 +254,9 @@ public class HPCA {
 		btnBrowse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser chooser = new JFileChooser();
-			    //FileNameExtensionFilter filter = new FileNameExtensionFilter(
-			        //"JPG & GIF Images", "jpg", "gif"); // bring back in with .MDP filter only
-			    //chooser.setFileFilter(filter);
+			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			        "MDP Files", "mdp"); // .MDP files only
+			    chooser.setFileFilter(filter);
 			    int returnVal = chooser.showOpenDialog(frame);
 			    if(returnVal == JFileChooser.APPROVE_OPTION) {
 			       System.out.println("You chose to open this file: " +
