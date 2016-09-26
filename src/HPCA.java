@@ -76,7 +76,7 @@ public class HPCA {
 	 * Initialise the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Simulation File Builder");
 		frame.setBounds(100, 100, 800, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -243,9 +243,11 @@ public class HPCA {
 		phStatusLabel.setBounds(636, 176, 25, 14);
 		frame.getContentPane().add(phStatusLabel);
 		
-	    
+		JLabel lblMDP = new JLabel("Select MDP file");
+		lblMDP.setBounds(30, 250, 189, 20);
+		frame.getContentPane().add(lblMDP);
+		
 		txtExamplefilemdp = new JTextField();
-		txtExamplefilemdp.setText("example_file.mdp");
 		txtExamplefilemdp.setBounds(30, 271, 189, 20);
 		frame.getContentPane().add(txtExamplefilemdp);
 		txtExamplefilemdp.setColumns(10);
@@ -272,6 +274,21 @@ public class HPCA {
 		JButton btnCreateFile = new JButton("Create file");
 		btnCreateFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				// Perform validations
+				// Check system size button group has selected value
+				if (bgSystemSize.getSelection() == null){
+					System.out.println("System size unselected");
+				}
+				// Check Organics selected group non-null
+				if (rightlist.getModel().getSize() == 0){
+					System.out.println("Organics selection is empty");
+				}
+				// Check spinners are all > 0
+				
+				// Check MDP file selected
+				if (txtExamplefilemdp.getText().equals("")){
+					System.out.println("No MDP file selected");
+				}
 				// Get all the selected values
 					// Get Mineral
 					String mineralName = comboBox_mineral.getSelectedItem().toString();

@@ -1,18 +1,18 @@
-Mineral:	PYROPHYLLITE
+Mineral:	ILLITE
 
 Solvent:	spc
 
-Organics:	[DECANOIC_ACID, NAPTHALENE]
+Organics:	[]
 
-Organics #:	[1, 2]
+Organics #:	[]
 
-System Size:	1
+System Size:	null
 
-Salt:		k
+Salt:		ca
 
-Concentration:	50
+Concentration:	25
 
-pH:		14
+pH:		7
 
-MDP File:	C:\Users\Nathan\Documents\Uni\Geol\Nathan\Nathan\share\test_mdp_file.mdp
+MDP File:	null
 
